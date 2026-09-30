@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>智链 · 关联交易</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body data-page="relations">
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">ZL</span><span><b>智链</b><small>比特币异常交易智能检测平台</small></span></a>
+    <nav class="main-nav">
+      <a href="/index.html"><span>01</span>地址查询</a>
+      <a class="active" href="/relations.html"><span>02</span>关联交易</a>
+      <a href="/analysis.html"><span>03</span>交易研判</a>
+    </nav>
+    <div class="system-status"><i></i>比特币主网研判服务在线</div>
+  </header>
+
+  <main class="page-shell workspace-page">
+    <section class="page-heading">
+      <div>
+        <div class="kicker"><span></span>RELATIONSHIP INTELLIGENCE</div>
+        <h1>地址关联交易全景分析</h1>
+        <p>地址角色、交易先后关系与风险研判结果已在同一视图汇聚。</p>
+      </div>
+      <a class="outline-button" href="/index.html">← 更换查询地址</a>
+    </section>
+
+    <section class="address-strip">
+      <div class="address-identity"><span class="coin-symbol">₿</span><div><small>当前研判地址</small><b id="current-address">正在读取…</b></div></div>
+      <div class="auto-badge" id="coverage-badge"><i>✓</i><span><b>链上交易自动研判已完成</b><small>已载入交易按综合风险从高到低排序</small></span></div>
+    </section>
+
+    <section class="metric-grid" id="address-metrics">
+      <article><small>关联交易</small><b>—</b><span>笔</span></article>
+      <article><small>重点关注交易</small><b>—</b><span>笔</span></article>
+      <article><small>作为输入地址</small><b>—</b><span>笔</span></article>
+      <article><small>作为输出地址</small><b>—</b><span>笔</span></article>
+      <article><small>最高风险指数</small><b>—</b><span>分</span></article>
+    </section>
+
+    <section class="relations-layout">
+      <article class="tech-card relation-card">
+        <div class="card-head relation-head"><div><span>01</span><h2>关联交易动态网络</h2><em id="graph-count">正在读取节点…</em></div><small>节点呼吸光效 · 输入/输出资金流动画 · 缩放拖动 · 点击交易进入研判</small></div>
+        <div class="graph-toolbar">
+          <div class="graph-search"><input id="graph-search" placeholder="搜索关联地址或交易哈希"><button id="graph-search-button">定位</button></div>
+          <div class="graph-actions"><button id="graph-zoom-out" title="缩小">−</button><button id="graph-reset" title="复位视图">适应全图</button><button id="graph-zoom-in" title="放大">＋</button></div>
+        </div>
+        <div id="relation-map" class="relation-map">
+          <canvas id="relation-canvas" tabindex="0" aria-label="地址与交易全量关联网络"></canvas>
+          <div id="graph-tooltip" class="graph-tooltip" hidden></div>
+          <div class="map-loading" id="graph-loading">正在构建全部地址与交易连接…</div>
+        </div>
+        <div class="map-legend"><span><i class="node-address"></i>当前地址</span><span><i class="node-counterparty"></i>关联地址</span><span><i class="node-risk"></i>重点关注交易</span><span><i class="node-normal"></i>常规交易</span><span><i class="flow-input"></i>输入资金流</span><span><i class="flow-output"></i>输出资金流</span><small>流向：输入地址 → 交易 → 输出地址</small></div>
+      </article>
+
+      <article class="tech-card role-card">
+        <div class="card-head"><div><span>02</span><h2>地址角色画像</h2></div></div>
+        <div id="role-visual" class="role-visual">
+          <div class="role-ring"><div><b>—</b><small>关联交易</small></div></div>
+          <div class="role-bars"></div>
+        </div>
+        <div class="sequence-box"><small>历史记录范围</small><b id="sequence-range">—</b><span>关联交易已按先后顺序整理</span></div>
+      </article>
+    </section>
+
+    <section class="tech-card transaction-card">
+      <div class="card-head transaction-head">
+        <div><span>03</span><h2>关联交易自动研判</h2><em id="transaction-count">0 笔</em></div>
+        <div class="table-tools">
+          <div class="segmented" id="risk-filter"><button class="active" data-filter="all">全部</button><button data-filter="high">重点关注</button><button data-filter="low">常规关注</button></div>
+          <input id="transaction-search" placeholder="搜索交易编号">
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>交易哈希</th><th>区块时间</th><th>当前地址角色</th><th>转账金额</th><th>风险指数</th><th>研判结论</th><th></th></tr></thead>
+          <tbody id="transaction-body"><tr><td colspan="7" class="empty-cell">正在自动研判关联交易…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="assistant-root"></div>
+  <footer><div><b>智链</b><span>比特币异常交易智能检测平台</span></div><p>关联网络行为研判 · 单笔交易属性研判 · 智能融合</p></footer>
+  <script src="/common.js"></script>
+  <script src="/relations.js"></script>
+</body>
+</html>

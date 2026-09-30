@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>智链 · 地址查询</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body data-page="address">
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">ZL</span><span><b>智链</b><small>比特币异常交易智能检测平台</small></span></a>
+    <nav class="main-nav">
+      <a class="active" href="/index.html"><span>01</span>地址查询</a>
+      <a href="/relations.html"><span>02</span>关联交易</a>
+      <a href="/analysis.html"><span>03</span>交易研判</a>
+    </nav>
+    <div class="system-status"><i></i>比特币主网研判服务在线</div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero hero-address">
+      <div class="hero-copy">
+        <div class="kicker"><span></span>ADDRESS INTELLIGENCE</div>
+        <h1>输入交易地址，<br><em>开启全链路智能研判</em></h1>
+        <p id="hero-service-copy">直连比特币主网，自动读取地址历史交易、区块时间、资金金额与输入输出关系，完成风险排序并支持单笔交易深入研判。</p>
+        <div class="capability-row">
+          <div><i>01</i><span><b>地址角色识别</b><small>输入与输出关系解析</small></span></div>
+          <div><i>02</i><span><b>关联交易评估</b><small>全部交易自动研判</small></span></div>
+          <div><i>03</i><span><b>风险证据融合</b><small>结构与属性双重分析</small></span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orbit orbit-1"></div><div class="orbit orbit-2"></div><div class="orbit orbit-3"></div>
+        <div class="core-node"><span>智链</span><small>BITCOIN RISK ENGINE</small></div>
+        <div class="satellite s1">地址角色</div><div class="satellite s2">交易关系</div><div class="satellite s3">风险信号</div>
+      </div>
+    </section>
+
+    <section class="search-console">
+      <div class="console-head"><div><span class="pulse"></span><b id="query-service-title">比特币主网地址查询</b></div><small id="query-service-note">链上数据实时读取 · 服务端安全接入</small></div>
+      <form id="address-form" class="address-form">
+        <label for="address-input">交易地址</label>
+        <div class="search-row">
+          <div class="tech-input"><span>₿</span><input id="address-input" autocomplete="off" spellcheck="false" placeholder="输入需要研判的比特币地址"></div>
+          <button class="primary-button" type="submit">开始查询 <b>→</b></button>
+        </div>
+        <div class="example-row"><span>示例地址</span><div id="address-examples"></div></div>
+      </form>
+      <div id="address-message"></div>
+      <div class="process-line">
+        <div class="active"><span>1</span><b>输入地址</b></div><i></i>
+        <div><span>2</span><b id="query-process-stage">链上读取</b></div><i></i>
+        <div><span>3</span><b>交易研判</b></div><i></i>
+        <div><span>4</span><b>形成结论</b></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="assistant-root"></div>
+  <footer><div><b>智链</b><span>比特币异常交易智能检测平台</span></div><p>关联网络行为研判 · 单笔交易属性研判 · 智能融合</p></footer>
+  <script src="/common.js"></script>
+  <script src="/address.js"></script>
+</body>
+</html>

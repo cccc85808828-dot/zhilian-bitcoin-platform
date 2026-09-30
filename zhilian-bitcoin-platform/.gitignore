@@ -1,0 +1,21 @@
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example
+
+# Python caches and local test output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.log
+
+# Local editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporary archives and local exports
+*.zip
+*.7z
+*.rar

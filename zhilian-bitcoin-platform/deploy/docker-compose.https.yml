@@ -1,0 +1,60 @@
+services:
+  tthgnn-qif-demo:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    env_file:
+      - ../.env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8765
+      BITCOIN_LIVE_ENABLED: ${BITCOIN_LIVE_ENABLED:-1}
+      BITCOIN_API_BASE_URL: ${BITCOIN_API_BASE_URL:-https://blockstream.info/api}
+      BITCOIN_API_TIMEOUT: ${BITCOIN_API_TIMEOUT:-20}
+      BITCOIN_CACHE_TTL: ${BITCOIN_CACHE_TTL:-300}
+      BITCOIN_MAX_TRANSACTIONS: ${BITCOIN_MAX_TRANSACTIONS:-75}
+      BITCOIN_MAX_PAGES: ${BITCOIN_MAX_PAGES:-3}
+      BITCOIN_INFERENCE_DEVICE: ${BITCOIN_INFERENCE_DEVICE:-cpu}
+      DEMO_RATE_LIMIT_PER_MINUTE: ${DEMO_RATE_LIMIT_PER_MINUTE:-120}
+      DEMO_MAX_BODY_BYTES: ${DEMO_MAX_BODY_BYTES:-16384}
+    expose:
+      - "8765"
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - >-
+          import urllib.request;
+          urllib.request.urlopen('http://127.0.0.1:8765/api/health', timeout=3)
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2.8-alpine
+    environment:
+      PUBLIC_HOST: ${PUBLIC_HOST:?请在项目根目录.env中填写公网域名}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      tthgnn-qif-demo:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

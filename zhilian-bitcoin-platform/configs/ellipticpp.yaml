@@ -1,0 +1,22 @@
+seed: 20260805
+
+data:
+  raw_root: data/raw/ellipticpp
+  processed_root: data/processed/ellipticpp
+  first_time_step: 1
+  last_time_step: 49
+  exclude_time_from_features: true
+
+split:
+  train: [1, 30]
+  validation: [31, 34]
+  test: [35, 49]
+
+labels:
+  illicit_raw_class: 1
+  licit_raw_class: 2
+  unknown_raw_class: 3
+  illicit_target: 1
+  licit_target: 0
+  unknown_target: -1
+

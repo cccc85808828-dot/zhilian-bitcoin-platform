@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>智链 · 交易研判</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body data-page="analysis">
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">ZL</span><span><b>智链</b><small>比特币异常交易智能检测平台</small></span></a>
+    <nav class="main-nav">
+      <a href="/index.html"><span>01</span>地址查询</a>
+      <a href="/relations.html"><span>02</span>关联交易</a>
+      <a class="active" href="/analysis.html"><span>03</span>交易研判</a>
+    </nav>
+    <div class="system-status"><i></i>比特币主网研判服务在线</div>
+  </header>
+
+  <main class="page-shell workspace-page">
+    <section class="page-heading">
+      <div>
+        <div class="kicker"><span></span>TRANSACTION DECISION</div>
+        <h1>单笔交易智能研判</h1>
+        <p>从关联网络行为与单笔交易属性两个视角，查看异常行为、模型证据和综合结论。</p>
+      </div>
+      <button class="outline-button" id="back-relations">← 返回关联交易</button>
+    </section>
+
+    <section class="analysis-target">
+      <div><small>当前研判交易</small><b id="analysis-transaction">正在读取…</b></div>
+      <div><small>关联查询地址</small><b id="analysis-address">—</b></div>
+      <span id="analysis-id">智能研判任务准备中</span>
+    </section>
+
+    <section class="tech-card pipeline-card">
+      <div class="card-head"><div><span>01</span><h2>智能研判流程</h2></div><small id="pipeline-status"><i></i>正在执行</small></div>
+      <div class="analysis-pipeline" id="analysis-pipeline">
+        <div><i>1</i><span><b>链上读取</b><small>载入交易与区块信息</small></span></div><em></em>
+        <div><i>2</i><span><b>角色上下文</b><small>解析输入输出地址</small></span></div><em></em>
+        <div><i>3</i><span><b>关联网络研判</b><small>识别关联行为与历史模式</small></span></div><em></em>
+        <div><i>4</i><span><b>单笔属性研判</b><small>识别交易属性异常组合</small></span></div><em></em>
+        <div><i>5</i><span><b>融合判定</b><small>形成综合结论</small></span></div>
+      </div>
+    </section>
+
+    <div id="analysis-content" class="analysis-content loading-content">
+      <section class="tech-card skeleton-card"><div></div><div></div><div></div></section>
+    </div>
+  </main>
+
+  <div id="assistant-root"></div>
+  <footer><div><b>智链</b><span>比特币异常交易智能检测平台</span></div><p>关联网络行为研判 · 单笔交易属性研判 · 智能融合</p></footer>
+  <script src="/common.js"></script>
+  <script src="/analysis.js"></script>
+</body>
+</html>

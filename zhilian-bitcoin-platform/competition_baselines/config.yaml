@@ -1,0 +1,65 @@
+seeds: [20260806, 20260807, 20260808, 20260809, 20260810]
+device: cuda
+
+data:
+  processed_root: "../data/processed/ellipticpp"
+  transaction_edges: "../data/raw/ellipticpp/Transactions Dataset/txs_edgelist.csv"
+  sequence_cache: "../artifacts/competition_baselines_5seed/cache/predecessor_3hop_sequences.pt"
+  subgraph_hops: 3
+  subgraph_nodes: 80
+
+split:
+  train: [1, 30]
+  validation: [31, 35]
+  test: [36, 49]
+
+models:
+  - mdst_gnn
+  - tfgat_dcplu
+  - ellipticpp_hgt
+  - fg_egcn
+  - gpn
+  - nsgcn_lstm
+
+model:
+  hidden_dim: 64
+  dropout: 0.25
+  attention_heads: 4
+  layers: 2
+  mdst_gnn:
+    hops: 3
+    ssl_weight: 0.10
+  tfgat_dcplu:
+    # The paper uses 512 dimensions. 64 dimensions and bounded global attention
+    # are the declared hardware-scaled setting for the local RTX 4060 8 GB.
+    hidden_dim: 64
+    attention_heads: 4
+    transformer_layers: 2
+    global_chunk_size: 768
+    global_tokens: 32
+    warmup_epochs: 5
+    refresh_interval: 3
+    pseudo_weight: 0.25
+  fg_egcn:
+    focal_gamma: 2.0
+  gpn:
+    noise_std: 0.05
+    aad_margin: 0.20
+    aad_weight: 0.20
+    hcbd_weight: 0.05
+    compactness_weight: 0.01
+    max_normal_samples: 1024
+
+training:
+  max_epochs: 20
+  patience: 4
+  min_delta: 0.0001
+  snapshots_per_step: 5
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  gradient_clip: 5.0
+
+evaluation:
+  top_fraction: 0.05
+
+output_root: "../artifacts/competition_baselines_5seed"

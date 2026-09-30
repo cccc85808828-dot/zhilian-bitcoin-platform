@@ -1,0 +1,36 @@
+seed: 20260806
+device: cuda
+data: {processed_root: data/processed/ellipticpp}
+split:
+  train: [1, 30]
+  validation: [31, 35]
+  test: [36, 49]
+model:
+  hidden_dim: 64
+  memory_dim: 64
+  dropout: 0.30
+  propagation_layers: 2
+  temporal_memory_enabled: true
+  role_aware_propagation: true
+training:
+  max_epochs: 60
+  patience: 10
+  min_delta: 0.0001
+  snapshots_per_step: 5
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  gradient_clip_norm: 5.0
+robust_learning:
+  enabled: true
+  environment_definition: snapshot
+  risk_estimator: class_balanced
+  penalty_weight: 10.0
+  warmup_epochs: 5
+augmentation:
+  enabled: false
+  method: rcha
+  loss_weight: 0.0
+  warmup_epochs: 5
+  ramp_epochs: 10
+output_root: artifacts/ablation/no_rcha/graph/seed_20260806
+baseline_comparison: artifacts/main_experiment/baselines/seed_20260806/comparison.json

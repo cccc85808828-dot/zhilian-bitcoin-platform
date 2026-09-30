@@ -1,0 +1,25 @@
+services:
+  tthgnn-qif-demo:
+    build: .
+    ports:
+      - "8765:8765"
+    environment:
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      DEEPSEEK_MODEL: ${DEEPSEEK_MODEL:-deepseek-v4-flash}
+      DEEPSEEK_BASE_URL: ${DEEPSEEK_BASE_URL:-https://api.deepseek.com}
+      LLM_PROVIDER: ${LLM_PROVIDER:-DeepSeek}
+      BITCOIN_LIVE_ENABLED: ${BITCOIN_LIVE_ENABLED:-1}
+      BITCOIN_API_BASE_URL: ${BITCOIN_API_BASE_URL:-https://blockstream.info/api}
+      BITCOIN_API_TIMEOUT: ${BITCOIN_API_TIMEOUT:-20}
+      BITCOIN_CACHE_TTL: ${BITCOIN_CACHE_TTL:-300}
+      BITCOIN_MAX_TRANSACTIONS: ${BITCOIN_MAX_TRANSACTIONS:-75}
+      BITCOIN_MAX_PAGES: ${BITCOIN_MAX_PAGES:-3}
+      BITCOIN_INFERENCE_DEVICE: ${BITCOIN_INFERENCE_DEVICE:-cpu}
+      DEMO_RATE_LIMIT_PER_MINUTE: ${DEMO_RATE_LIMIT_PER_MINUTE:-120}
+      DEMO_MAX_BODY_BYTES: ${DEMO_MAX_BODY_BYTES:-16384}
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    restart: unless-stopped
